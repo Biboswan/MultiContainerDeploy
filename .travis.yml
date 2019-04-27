@@ -9,10 +9,10 @@ script:
   - docker run -e CI=true kokolocco/react-test npm run test -- --watchAll=false
 
 after_success:
-  - docker -t build kokolocco/multi_client ./client
-  - docker -t build kokolocco/multi_server ./server
-  - docker -t build kokolocco/multi_nginx ./nginx
-  - docker -t build kokolocco/multi_worker ./worker
+  - docker build -t kokolocco/multi_client ./client
+  - docker build -t kokolocco/multi_server ./server
+  - docker build -t kokolocco/multi_nginx ./nginx
+  - docker build -t kokolocco/multi_worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push kokolocco/multi_client
   - docker push kokolocco/multi_server
